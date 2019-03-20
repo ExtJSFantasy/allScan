@@ -41,7 +41,7 @@
 		data() {
 			return {
 				showText: '识别中。。。',
-				tempImg: 'http://tmp/touristappid.o6zAJs1CL8vtlro7XqJ-bCW5YMJA.TBb2wF0g3anJdc2286360068f7631c8c4161dff35d6a.jpeg',
+				tempImg: '',
 				carInfo: [],
 				carFirstName: '',
 				similarity: 0,
@@ -54,6 +54,7 @@
 		onLoad(params) {
 			const that = this;
 			console.log(params.imgSrc);
+			that.tempImg = params.imgSrc;
 			//return
 			uni.showLoading({
 				title: '识别中',
