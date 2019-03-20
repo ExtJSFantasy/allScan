@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/identify/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "扫一扫",
+    "navigationBarBackgroundColor": "#1FB6D8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

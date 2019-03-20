@@ -1,0 +1,3 @@
+<import src="/components/circle-percent/circle-percent.vue.wxml" />
+<import src="/components/grid.vue.wxml" />
+
