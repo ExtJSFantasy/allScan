@@ -43,15 +43,13 @@ const getDateStr = AddDayCount => {
 	d = d < 10 ? ('0' + d) : d;
 	return y + "-" + m + "-" + d;
 }
-const Audio2dataURL = (path) => {
+const Audio2dataURL = async (path) => {
 	console.log(path);
-	let dateUrl =  new Promise((resolve,reject) => {
+	return await new Promise((resolve,reject) => {
 		plus.io.resolveLocalFileSystemURL(path, function(entry) {
 			entry.file(function(file) {
 				var reader = new plus.io.FileReader();
 				reader.onloadend = function(e) {
-					console.log('32324uh');
-					//callback(e.target.result.split(',')[1])
 					let obj = {};
 					obj.speech = e.target.result.split(',')[1];
 					obj.len = file.size;
@@ -59,14 +57,12 @@ const Audio2dataURL = (path) => {
 				};
 				reader.readAsDataURL(file);
 			}, function(e) {
-				console.log(e);
 				uni.showToast({
 					title: '读写出现异常'
 				})
 			})
 		})
 	})
-	return dateUrl
 }
 const dataURL2Audio = (base64Str) => {
 	var base64Str = base64Str.replace('data:audio/amr;base64,', '');
