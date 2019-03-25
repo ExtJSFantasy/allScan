@@ -116,7 +116,8 @@
 				width: 100%;
 				text-align: center;
 				z-index: 90;
-				color:#fff;
+				// color:#fff;
+				color:#777;
 			}
 		}
 

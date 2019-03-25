@@ -103,7 +103,8 @@
 	.uni-grid-item:before {
 		display: block;
 		content: " ";
-		padding-bottom: 100%
+		padding-bottom: 100%;
+		/* padding-bottom: 60%; */
 	}
 
 	.uni-grid-item:after {

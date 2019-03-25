@@ -3,9 +3,6 @@
 		<view>
 			<grid :data="data" show-border="false" @click="onTapGoSearch"></grid>
 		</view>
-		<view class="md_scan">
-			<image :src="imgSrc"></image>
-		</view>
 	</view>
 </template>
 
@@ -21,40 +18,25 @@
 			return {
 				data: [{
 						image: '/static/icon/aochuang.png',
-						text: '车辆识别'
+						text: '通用'
 					},
 					{
 						image: '/static/icon/elingqishi.png',
-						text: '恶灵骑士'
+						text: '菜品'
 					},
 					{
 						image: '/static/icon/feihongnvwu.png',
-						text: '绯红女巫'
+						text: '植物'
 					},
 					{
 						image: '/static/icon/honghaoke.png',
-						text: '洪浩克'
+						text: '动物'
 					},
 					{
 						image: '/static/icon/luoji.png',
-						text: '洛基'
+						text: '车辆'
 					},
-					{
-						image: '/static/icon/luonan.png',
-						text: '罗南'
-					},
-					{
-						image: '/static/icon/mieba.png',
-						text: '灭霸'
-					},
-					{
-						image: '/static/icon/qiyiboshi.png',
-						text: '奇异博士'
-					},
-					{
-						image: '/static/icon/zemonanjue.png',
-						text: '男爵'
-					}
+					{},
 				],
 				imgSrc: '/static/icon/aochuang.png'
 			}
@@ -67,12 +49,6 @@
 				console.log(e);
 				const that = this;
 				that.imgSrc = e.item.image;
-				if(e.index != 0){
-					uni.showToast({
-						title: '敬请期待^_^',
-					})
-					return
-				}
 				// 选择图片 相册或者拍照
 				uni.chooseImage({
 					count: 1, //默认9
@@ -85,7 +61,7 @@
 							  success: function (resInner) {
 								var savedFilePath = resInner.savedFilePath;
 								uni.navigateTo({
-									url: `../identify/index?imgSrc=${resInner.savedFilePath}&id=${e.index}`
+									url: `../picIdentify/index?imgSrc=${resInner.savedFilePath}&id=${e.index}&category=${e.item.text}`
 								})
 							  }
 							});
