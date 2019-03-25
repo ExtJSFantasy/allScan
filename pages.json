@@ -66,6 +66,7 @@
 				"selectedIconPath": "static/picS.png",
 				"text": "图像"
 			}
+			// #ifdef APP-PLUS
 			,
 			{
 				"pagePath": "pages/voiceRecognition/index",
@@ -73,6 +74,7 @@
 				"selectedIconPath": "static/voiceS.png",
 				"text": "语音"
 			}
+			// #endif
 			// #ifdef MP-WEIXIN
 			,
 			{

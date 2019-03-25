@@ -5,7 +5,7 @@
 			<view class="md_content_title">
 				<image class="md_temp_img" :src="tempImg"></image>
 				<view class="md_show_car">
-					<view style="flex: 1;display:flex;height:100%;justify-content:center;align-items:center;width:100%;text-align:center;"><text
+					<view class="md_show_name"><text
 						 v-text="carFirstName"></text></view>
 					<view style="flex: 3;" class="tjBody flexRow">
 						<circle-percent titleOne="匹配度" titleTwo="" bg="#fbad4c" :percent="similarity"></circle-percent>
@@ -27,7 +27,7 @@
 			<view class="md_content_title">
 				<image class="md_temp_img" :src="tempImg"></image>
 				<view class="md_show_car">
-					<view style="flex: 1;display:flex;height:100%;justify-content:center;align-items:center;width:100%;text-align:center;">
+					<view class="md_show_name">
 						<view>
 							<view style="font-size:36rpx;"><text v-text="carFirstName"></text></view>
 							<view style="font-size:18rpx;"><text>{{calorie}}卡路里</text></view>
@@ -53,7 +53,7 @@
 			<view class="md_content_title">
 				<image class="md_temp_img" :src="tempImg"></image>
 				<view class="md_show_car">
-					<view style="flex: 1;display:flex;height:100%;justify-content:center;align-items:center;width:100%;text-align:center;">
+					<view class="md_show_name">
 						<text v-text="carFirstName"></text>
 					</view>
 					<view style="flex: 3;" class="tjBody flexRow">
@@ -75,7 +75,7 @@
 			<view class="md_content_title">
 				<image class="md_temp_img" :src="tempImg"></image>
 				<view class="md_show_car">
-					<view style="flex: 1;display:flex;height:100%;justify-content:center;align-items:center;width:100%;text-align:center;">
+					<view class="md_show_name">
 						<text v-text="carFirstName"></text>
 					</view>
 					<view style="flex: 3;" class="tjBody flexRow">
@@ -97,7 +97,7 @@
 			<view class="md_content_title">
 				<image class="md_temp_img" :src="tempImg"></image>
 				<view class="md_show_car">
-					<view style="flex: 1;display:flex;height:100%;justify-content:center;align-items:center;width:100%;text-align:center;"><text
+					<view class="md_show_name"><text
 						 v-text="carFirstName"></text></view>
 					<view style="flex: 3;" class="tjBody flexRow">
 						<circle-percent titleOne="匹配度" titleTwo="" bg="#fbad4c" :percent="similarity"></circle-percent>
@@ -425,6 +425,21 @@
 				flex: 1;
 				text-align: center;
 			}
+			.md_tf:nth-child(4) {
+				flex: 1;
+				text-align: center;
+				padding:8upx 15upx 8upx 15upx;
+			}
 		}
+	}
+
+	.md_show_name {
+		flex: 1;
+		display: flex;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		text-align: center;
 	}
 </style>

@@ -281,6 +281,11 @@
 				flex: 1;
 				text-align: center;
 			}
+			.md_tf:nth-child(4) {
+				flex: 1;
+				text-align: center;
+				padding:8upx 15upx 8upx 15upx;
+			}
 		}
 
 		.md_footer {

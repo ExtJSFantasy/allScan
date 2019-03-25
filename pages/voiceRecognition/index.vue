@@ -18,9 +18,12 @@
 				<view style="display: flex;margin-top: 10upx;">
 					<view class="md_flex1">
 					</view>
-					<view v-show="item.show" style="flex: 5;font-size: 28upx;padding: 8upx;border-radius: 10upx;background-color: rgb(212, 212, 212);">
-						<view v-text="item.text"></view>
-						<view style="font-size: 16upx;" class="uni-icon uni-icon-checkmarkempty">转换完成</view>
+					<view v-show="item.show || item.showLoading" class="md_show_text">
+						<image v-show="item.showLoading" class="rotation img" src="../../static/loading.png" />
+						<view v-show="item.show">
+							<view v-text="item.text"></view>
+							<view style="font-size: 16upx;" class="uni-icon uni-icon-checkmarkempty">转换完成</view>
+						</view>
 					</view>
 					<view class="md_flex1">
 					</view>
@@ -43,10 +46,12 @@
 				<view style="display: flex;margin-top: 10upx;">
 					<view class="md_flex1">
 					</view>
-					<view v-show="item.show" style="flex: 5;font-size: 28upx;padding: 8upx;border-radius: 10upx;background-color: rgb(212, 212, 212);">
-						<!-- <image v-show="item.show" class="rotation img" src="../../static/loading.png" /> -->
-						<view v-text="item.text"></view>
-						<view style="font-size: 16upx;" class="uni-icon uni-icon-checkmarkempty">转换完成</view>
+					<view v-show="item.show || item.showLoading" class="md_show_text">
+						<image v-show="item.showLoading" class="rotation img" src="../../static/loading.png" />
+						<view v-show="item.show">
+							<view v-text="item.text"></view>
+							<view style="font-size: 16upx;" class="uni-icon uni-icon-checkmarkempty">转换完成</view>
+						</view>
 					</view>
 					<view class="md_flex1">
 					</view>
@@ -99,6 +104,7 @@
 						audioObj.src = res.tempFilePath;
 						audioObj.text = '';
 						audioObj.show = false;
+						audioObj.showLoading = false;
 						self.voicelist.push(audioObj);
 					}, 200)
 				}
@@ -159,6 +165,7 @@
 			// 语音转文字
 			translation(res) {
 				let that = this;
+				res.showLoading = true;
 				console.log(utils.getStorageToken());
 				if (utils.getStorageToken()) {
 					utils.Audio2dataURL(res.src).then(dataObj => {
@@ -195,13 +202,16 @@
 											if (success.err_no == 0) {
 												res.text = success.data.result[0];
 												res.show = true;
+												res.showLoading = false;
 											} else {
+												res.showLoading = false;
 												uni.showToast({
 													title: success.data.err_msg
 												});
 											}
 
 										}, (err) => {
+											res.showLoading = false;
 											console.log(err, '4444');
 										})
 									})
@@ -209,9 +219,11 @@
 							} else if (success.data.err_no == 0) {
 								res.text = success.data.result[0];
 								res.show = true;
+								res.showLoading = false;
 							} else {
+								res.showLoading = false;
 								uni.showToast({
-									title: success.data.err_msg
+									title: '识别失败'
 								});
 							}
 
@@ -220,6 +232,7 @@
 							uni.hideLoading()
 						})
 					}).catch((err) => {
+						res.showLoading = false;
 						uni.hideLoading()
 					})
 				} else {
@@ -242,16 +255,18 @@
 								if (success.err_no == 0) {
 									res.text = success.data.result[0];
 									res.show = true;
+									res.showLoading = false;
 									/* uni.showToast({
 										title: success.data.result[0]
 									}) */
 								} else {
+									res.showLoading = false;
 									uni.showToast({
-										title: success.data.err_msg
+										title: '识别失败'
 									});
 								}
-
 							}, (err) => {
+								res.showLoading = false;
 								console.log(err, '4444');
 							})
 						})
@@ -424,5 +439,13 @@
 		width: 48upx;
 		height: 48upx;
 		margin-left: 10upx;
+	}
+
+	.md_show_text {
+		flex: 5;
+		font-size: 28upx;
+		padding: 8upx;
+		border-radius: 10upx;
+		background-color: rgb(212, 212, 212);
 	}
 </style>
