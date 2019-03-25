@@ -71,13 +71,6 @@
 		},
 		onLoad(params) {
 			const that = this;
-
-			let params1 = {
-				id: '1',
-				category: '银行卡',
-				imgSrc: 'http://store/wx0647fa8eeb43889c.o6zAJs1CL8vtlro7XqJ-bCW5YMJA.K95lKWHxJIVT1b4497737a705182925bf36075b795a9.jpeg'
-			}
-			console.log(params);
 			that.tempImg = params.imgSrc;
 			uni.setNavigationBarTitle({
 				title: `${params.category}识别`
@@ -115,6 +108,7 @@
 
 		},
 		methods: {
+			// 初始化数据
 			initData() {
 
 			},
@@ -143,6 +137,7 @@
 						if (params.id == 0 || params.id == 2 || params.id == 3) {
 							let _obj = JSON.parse(uploadFileRes.data).words_result;
 							let _arr = [];
+							// 遍历对象取出属性名和属性值
 							Object.keys(_obj).forEach(function(key) {
 								let temObj = {};
 								temObj.name = key;
@@ -181,7 +176,7 @@
 					}
 				});
 			},
-			//
+			//footer
 			onChange(data) {
 				console.log(data);
 			}

@@ -44,7 +44,6 @@ const getDateStr = AddDayCount => {
 	return y + "-" + m + "-" + d;
 }
 const Audio2dataURL = async (path) => {
-	console.log(path);
 	return await new Promise((resolve,reject) => {
 		plus.io.resolveLocalFileSystemURL(path, function(entry) {
 			entry.file(function(file) {

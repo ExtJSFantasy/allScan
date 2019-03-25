@@ -3,9 +3,6 @@
 		<view>
 			<grid :data="data" show-border="false" @click="onTapGoSearch"></grid>
 		</view>
-		<!-- <view class="md_scan">
-			<image :src="imgSrc"></image>
-		</view> -->
 	</view>
 </template>
 
@@ -45,11 +42,8 @@
 			}
 		},
 		methods: {
-			onClick(e) {
-				console.log('点击grid:' + JSON.stringify(e));
-			},
+			// 点击每一项
 			onTapGoSearch(e) {
-				console.log(e);
 				const that = this;
 				that.imgSrc = e.item.image;
 				if (e.index == 0) {
@@ -57,12 +51,6 @@
 						title: '身份证含照片的一面',
 					})
 				}
-				/* if (e.index != 0) {
-					uni.showToast({
-						title: '敬请期待^_^',
-					})
-					return
-				} */
 				// 选择图片 相册或者拍照
 				uni.chooseImage({
 					count: 1, //默认9
@@ -82,18 +70,6 @@
 								console.log(err);
 							}
 						});
-						// #endif
-						// #ifdef H5
-						console.log(res.tempFilePaths[0].split(':')[0]);
-						var file = new File([res.tempFilePaths[0].split(':')[0]], 'xds', {
-							type: 'mime',
-							lastModified: Date.now()
-						});
-						console.log(file);
-						/* console.log('3232kk');
-						uni.navigateTo({
-							url: `../identify/index?imgSrc=${res.tempFilePaths[0]}&id=${e.index}`
-						}) */
 						// #endif
 					},
 					fail(err) {

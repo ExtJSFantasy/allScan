@@ -25,12 +25,6 @@
 			}
 		},
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "扫一扫"
-			}
-		},
-		{
 			"path": "pages/identify/index",
 			"style": {
 				"navigationBarTitleText": "识别"

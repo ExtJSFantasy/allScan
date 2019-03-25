@@ -71,7 +71,7 @@
 	const utils = require('@/commons/utils');;
 	const speechObj = require('@/commons/contants');
 	const recorderManager = uni.getRecorderManager();
-	const innerAudioContext = uni.createInnerAudioContext();
+	let innerAudioContext = uni.createInnerAudioContext();
 	let access_token = "";
 	//innerAudioContext.autoplay = true;
 	export default {
@@ -87,7 +87,6 @@
 		},
 		onLoad() {
 			const self = this;
-			console.log(plus.device.imei);
 			recorderManager.onStop(function(res) {
 				if (self.recordCancel) {
 					self.recordCancel = false;
@@ -99,6 +98,7 @@
 					});
 					let audioObj = {};
 					setTimeout(() => {
+						// Math.round() 四舍五入
 						audioObj.duration = `${Math.round(innerAudioContext.duration)}"`;
 						console.log(innerAudioContext.duration);
 						audioObj.src = res.tempFilePath;
@@ -122,7 +122,7 @@
 				this.startTime = (new Date()).getTime();
 				this.isShow = true;
 				recorderManager.start({
-					format: 'wav',
+					format: uni.getSystemInfoSync().platform == 'android' ? 'amr' : 'wav',
 					sampleRate: 16000,
 					encodeBitRate: 80000
 				});
@@ -142,6 +142,10 @@
 				if (item.show) {
 					item.show = false;
 				} else {
+					//销毁当前实例
+					innerAudioContext.destroy();
+					// 重新创建
+					innerAudioContext = uni.createInnerAudioContext();
 					innerAudioContext.src = item.src;
 					innerAudioContext.play();
 					innerAudioContext.onPlay(() => {
@@ -166,15 +170,14 @@
 			translation(res) {
 				let that = this;
 				res.showLoading = true;
-				console.log(utils.getStorageToken());
 				if (utils.getStorageToken()) {
 					utils.Audio2dataURL(res.src).then(dataObj => {
 						let access_token = utils.getStorageToken();
 						let data = {
-							format: speechObj.format,
+							format: uni.getSystemInfoSync().platform == 'android' ? 'amr' : speechObj.format,
 							rate: speechObj.rate,
 							channel: speechObj.channel,
-							cuid: speechObj.iosCuid,
+							cuid: uni.getSystemInfoSync().platform == 'android' ? plus.device.imei : speechObj.iosCuid,
 							token: access_token,
 							speech: dataObj.speech,
 							len: dataObj.len,
@@ -188,7 +191,7 @@
 									utils.Audio2dataURL(res.src).then(dataObj => {
 										let access_token = result.data.access_token;
 										let data = {
-											format: speechObj.format,
+											format: uni.getSystemInfoSync().platform == 'android' ? 'amr' : speechObj.format,
 											rate: speechObj.rate,
 											channel: speechObj.channel,
 											cuid: speechObj.iosCuid,
@@ -244,7 +247,7 @@
 								format: speechObj.format,
 								rate: speechObj.rate,
 								channel: speechObj.channel,
-								cuid: speechObj.iosCuid,
+								cuid: uni.getSystemInfoSync().platform == 'android' ? plus.device.imei : speechObj.iosCuid,
 								token: access_token,
 								speech: dataObj.speech,
 								len: dataObj.len,

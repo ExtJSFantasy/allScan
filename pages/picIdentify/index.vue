@@ -161,8 +161,8 @@
 		},
 		onLoad(params) {
 			const that = this;
-			console.log(params);
 			that.tempImg = params.imgSrc;
+			// 改变title
 			uni.setNavigationBarTitle({
 				title: `${params.category}识别`
 			});
@@ -217,7 +217,6 @@
 					},
 					success: (uploadFileRes) => {
 						uni.hideLoading();
-						console.log(JSON.parse(uploadFileRes.data));
 						let result;
 						that.type = params.id;
 						switch (params.id) {
@@ -290,18 +289,24 @@
 					}
 				});
 			},
+			// 点击右侧的 ... 查看详情
 			onClickGoDetails(item) {
 				if (item.baike_info.image_url == undefined) {
-					return
+					uni.showToast({
+						title: '没有内容',
+						mask: false,
+						duration: 1500
+					});
 				} else {
 					this.detailData = item.baike_info;
 					this.bannerShow = true;
 				}
 
 			},
+			// 关闭弹窗
 			closeBanner: function() {
 				this.bannerShow = false;
-			},
+			}
 		}
 	}
 </script>

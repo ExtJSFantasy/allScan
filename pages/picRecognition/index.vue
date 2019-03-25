@@ -42,11 +42,7 @@
 			}
 		},
 		methods: {
-			onClick(e) {
-				console.log('点击grid:' + JSON.stringify(e));
-			},
 			onTapGoSearch(e) {
-				console.log(e);
 				const that = this;
 				that.imgSrc = e.item.image;
 				// 选择图片 相册或者拍照
@@ -65,12 +61,6 @@
 								})
 							  }
 							});
-						// #endif
-						// #ifdef H5
-							/* console.log('3232kk');
-							uni.navigateTo({
-								url: `../identify/index?imgSrc=${res.tempFilePaths[0]}&id=${e.index}`
-							}) */
 						// #endif
 					}
 				});
