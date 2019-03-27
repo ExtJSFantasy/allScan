@@ -24,7 +24,7 @@
 			<view class="uni-card-content">
 				<view class="uni-card-content-inner">
 					<view class="md_content_title">
-						<image class="md_temp_img" :src="tempImg"></image>
+						<image class="md_temp_img" :src="tempImg" @tap="previewImg"></image>
 						<view class="md_show_car">
 							<view>
 								<view>卡号：<text class="md_tf" v-text="backData.bank_card_number"></text></view>
@@ -179,6 +179,13 @@
 			//footer
 			onChange(data) {
 				console.log(data);
+			},
+			// 预览图片
+			previewImg(){
+				// 预览图片
+				uni.previewImage({
+					urls: [this.tempImg]
+				});
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 	<view>
 		<view v-if="type == 0" class="md_content">
 			<view class="md_content_title">
-				<image class="md_temp_img" :src="tempImg"></image>
+				<image class="md_temp_img" :src="tempImg" @tap="previewImg"></image>
 				<view class="md_show_car">
 					<view class="md_show_name"><text
 						 v-text="carFirstName"></text></view>
@@ -25,7 +25,7 @@
 		</view>
 		<view v-else-if="type == 1" class="md_content">
 			<view class="md_content_title">
-				<image class="md_temp_img" :src="tempImg"></image>
+				<image  class="md_temp_img" :src="tempImg" @tap="previewImg"></image>
 				<view class="md_show_car">
 					<view class="md_show_name">
 						<view>
@@ -51,7 +51,7 @@
 		</view>
 		<view v-else-if="type == 2" class="md_content">
 			<view class="md_content_title">
-				<image class="md_temp_img" :src="tempImg"></image>
+				<image class="md_temp_img" :src="tempImg" @tap="previewImg"></image>
 				<view class="md_show_car">
 					<view class="md_show_name">
 						<text v-text="carFirstName"></text>
@@ -73,7 +73,7 @@
 		</view>
 		<view v-else-if="type == 3" class="md_content">
 			<view class="md_content_title">
-				<image class="md_temp_img" :src="tempImg"></image>
+				<image class="md_temp_img" :src="tempImg" @tap="previewImg"></image>
 				<view class="md_show_car">
 					<view class="md_show_name">
 						<text v-text="carFirstName"></text>
@@ -95,7 +95,7 @@
 		</view>
 		<view v-else-if="type == 4" class="md_content">
 			<view class="md_content_title">
-				<image class="md_temp_img" :src="tempImg"></image>
+				<image class="md_temp_img" :src="tempImg" @tap="previewImg"></image>
 				<view class="md_show_car">
 					<view class="md_show_name"><text
 						 v-text="carFirstName"></text></view>
@@ -306,6 +306,13 @@
 			// 关闭弹窗
 			closeBanner: function() {
 				this.bannerShow = false;
+			},
+			// 预览图片
+			previewImg(){
+				// 预览图片
+				uni.previewImage({
+					urls: [this.tempImg]
+				});
 			}
 		}
 	}
